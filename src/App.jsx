@@ -35,25 +35,25 @@ import Home from "./pages/Home";
 import Calendar from "./pages/Calendar";
 import Shopping from "./pages/Shopping";
 import SignUp from "./pages/SignUp";
+import { GiKnifeFork } from "react-icons/gi";
 
-function App() {
-  return (
-    <>
-      <Navbar />
+// function App() {
+//   return (
+//     <>
+//       <Navbar />
         
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/calendar" element={<Calendar />} />
-          <Route path="/shopping" element={<Shopping />} />
-          <Route path="/signup" element={<SignUp />} />
+//         <Routes>
+//           <Route path="/" element={<Home />} />
+//           <Route path="/calendar" element={<Calendar />} />
+//           <Route path="/shopping" element={<Shopping />} />
+//           <Route path="/signup" element={<SignUp />} />
 
         
-        </Routes>
-      <Footer />
-    </>
-import Footer from "./components/Footer"
+//         </Routes>
+//       <Footer />
+//     </>
+//   )};
 
-// import { GiKnifeFork } from "react-icons/gi";
 
 function App() {
   return (
@@ -63,7 +63,7 @@ function App() {
         <img className="w-full bg-center flex" src="/food.jpg" alt="food" />
         <Search />
         <Category />
-        <Pages />
+        <Pages />src/App.jsx
         <Footer />
       </BrowserRouter>
     </div>
