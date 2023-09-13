@@ -1,5 +1,5 @@
 import Pages from "./pages/Pages";
-import Category from "./components/Category";
+// import Category from "./components/Category";
 import { BrowserRouter } from "react-router-dom";
 import Search from "./components/Search";
 import Navbar from "./components/Navbar";
@@ -12,7 +12,7 @@ function App() {
         <Navbar />
         <img className="w-full bg-center flex" src="/food.jpg" alt="food" />
         <Search />
-        <Category />
+        {/* <Category /> */}
         <Pages />
         <Footer />
       </BrowserRouter>

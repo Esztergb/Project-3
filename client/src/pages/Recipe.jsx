@@ -13,6 +13,7 @@ import { styled } from "styled-components";
 
         const detailData = await data.json();
         setDetails(detailData);
+        console.log(details)
     }
 
     useEffect(() => {

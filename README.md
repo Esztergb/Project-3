@@ -97,7 +97,7 @@ Features of the site include Reacts ability to easily create a one page applicat
 
 ## Suggested Future Development
 
-- 
+- Connect to Instacart
 - 
 - 
 
@@ -121,6 +121,7 @@ To learn more click on the following *[link](https://opensource.org/licenses/MIT
 
 ##  Credits
 Thank you for tips and sugestions from Bootcamp instructors and classmates. 
+Followed You Tube 
 
 XXX
 

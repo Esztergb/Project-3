@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const db = require('./config/connection');
+// const routes = require('./routes'); // fixed if routes folder isnt used
+
 const spoonacularRoute = require('./utils/API');
 const { ApolloServer } = require('@apollo/server');
 const { typeDefs , resolvers } = require('./schemas');
@@ -22,6 +24,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/dist')));
 }
 
+
 app.get( '*' , (req ,res) => {
   res.sendFile(path.join(__dirname , '../client/dist/index.html'))
 })
@@ -37,5 +40,8 @@ const startApolloServer = async () => {
     })
   })
 };
+
+// app.use(routes);
+
 
 startApolloServer();
