@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import styled from "styled-components";
 import { motion } from 'framer-motion';
-import { Link, useParams } from 'react-router-dom'; //useParams pulls out keyword from URL
-import RecipeButton from "../components/RecipeButton";
-import FavButton from "../components/FavButton";
+import { useParams } from 'react-router-dom'; //useParams pulls out keyword from URL
+import RecipeCard from "../components/RecipeCard";
 import { getCuisine } from "../api/spoonacular";
 
 function Cuisine() {
@@ -30,21 +29,12 @@ function Cuisine() {
     >
       {cuisine.map((item) => {
         return (
-          <Card key={item.id}>
-            <div>
-              <img src={item.image} alt="" />
-              <h4>{item.title}</h4>
-            </div>
-
-            <Buttons>
-              <Link to={"/recipe/" + item.id}>
-                <RecipeButton />
-              </Link>
-              <Link to={"/MyRecipes/"}>
-                <FavButton />
-              </Link>
-            </Buttons>
-          </Card>
+          <RecipeCard
+            key={item.id}
+            image={item.image}
+            title={item.title}
+            id={item.id}
+          />
         );
       })}
     </Grid>
@@ -58,29 +48,4 @@ const Grid = styled(motion.div)`
     margin: 5rem;
    
 `
-const Card = styled.div`
-  min-height: 20rem;
-  border-radius: 1rem;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 7px;
-  img {
-    width: 100%;
-  }
-  a {
-    text-decoration: none;
-  }
-  h4 {
-    text-align: center;
-    padding: 1rem;
-  }
-`;
-
-const Buttons = styled.div`
-display: flex;
-  
-`
-
 export default Cuisine

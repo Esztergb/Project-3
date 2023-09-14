@@ -44,7 +44,4 @@ const startApolloServer = async () => {
   })
 };
 
-
-
-
 startApolloServer();
