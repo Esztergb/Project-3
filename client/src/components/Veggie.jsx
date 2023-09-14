@@ -5,36 +5,21 @@ import "@splidejs/react-splide/css";
 import { Link } from "react-router-dom";
 import RecipeButton from "../components/RecipeButton";
 import FavButton from "../components/FavButton";
-
-
+import { getVeggie } from "../api/spoonacular";
 
 function Veggie() {
- const [veggie, setVeggie] = useState([]);
+  const [veggie, setVeggie] = useState([]);
 
- //useEffect automatically imports from React - running the getPupuler function only when the component is mounted
- useEffect(() => {
-   getVeggie();
- }, []);
-
- // fetch request to Spoonacular API to find random (veggie) recipes.
- const getVeggie = async () => {
-   const check = localStorage.getItem("veggie");
-
-   if (check) {
-     setVeggie(JSON.parse(check));
-   } else {
-     const api = await fetch(
-       `https://api.spoonacular.com/recipes/random?apiKey=74db62d59a674bbc85356ed301f3b3e2&number=12&tags=vegetarian`
-     );
-     const data = await api.json();
-     localStorage.setItem("veggie", JSON.stringify(data.recipes));
-     setVeggie(data.recipes);
-     console.log(data.recipe)
-   }
- };
-
-
-
+  //useEffect automatically imports from React - running the getPupuler function only when the component is mounted
+  useEffect(() => {
+    getVeggie()
+      .then((recipes) => {
+        setVeggie(recipes);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <div>

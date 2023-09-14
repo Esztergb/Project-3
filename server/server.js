@@ -1,8 +1,12 @@
 const express = require('express');
 const path = require('path');
 const db = require('./config/connection');
-// const routes = require('./routes'); // fixed if routes folder isnt used
+
+//API and API Key 
 const spoonacularRoute = require('./utils/API');
+const dotenv = require('dotenv')
+dotenv.config()
+
 const { ApolloServer } = require('@apollo/server');
 const { typeDefs , resolvers } = require('./schemas');
 const { authMiddlewear } = require('./utils/auth');
@@ -40,7 +44,7 @@ const startApolloServer = async () => {
   })
 };
 
-// app.use(routes);
+
 
 
 startApolloServer();
