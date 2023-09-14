@@ -5,31 +5,20 @@ import "@splidejs/react-splide/css";
 import { Link } from "react-router-dom";
 import RecipeButton from "../components/RecipeButton";
 import FavButton from "../components/FavButton";
-
+import { getPopular } from "../api/spoonacular";
 
 function Popular() {
   const [popular, setPopular] = useState([]);
 
-  //useEffect automatically imports from React - running the getPupuler function only when the component is mounted
   useEffect(() => {
-    getPopular();
+    getPopular()
+      .then((recipes) => {
+        setPopular(recipes);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
-
-  // fetch request to Spoonacular API to find random (popular) recipes.
-  const getPopular = async () => {
-    const check = localStorage.getItem("popular");
-
-    if (check) {
-      setPopular(JSON.parse(check));
-    } else {
-      const api = await fetch(
-        `https://api.spoonacular.com/recipes/random?apiKey=74db62d59a674bbc85356ed301f3b3e2&number=12`
-      );
-      const data = await api.json();
-      localStorage.setItem("popular", JSON.stringify(data.recipes));
-      setPopular(data.recipes);
-    }
-  };
 
   return (
     <div>
@@ -45,9 +34,9 @@ function Popular() {
             drag: "free",
             gap: "3rem",
             breakpoints: {
-              1024: { perPage: 3, },
-              767: { perPage: 2, },
-              640: { perPage: 1, },
+              1024: { perPage: 3 },
+              767: { perPage: 2 },
+              640: { perPage: 1 },
             },
             focus: "center",
             updateOnMove: true,

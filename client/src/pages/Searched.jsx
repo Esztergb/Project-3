@@ -4,7 +4,7 @@ import { styled } from 'styled-components';
 import { Link } from 'react-router-dom';
 import RecipeButton from '../components/RecipeButton';
 import FavButton from '../components/FavButton';
-import { getSearchedRecipes } from '../api/spoonacular';
+import { getSearchedRecipes } from "../api/spoonacular";
 
 function Searched() {
   const [searchedRecipies, setSearchedRecipies] = useState([]);
