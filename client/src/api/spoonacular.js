@@ -11,7 +11,6 @@ export const getSearchedRecipes = async (name
   }
 };
 
-// import axios from "axios";
 
 // export const getSearchedRecipes = async (name) => {
 //   try {
