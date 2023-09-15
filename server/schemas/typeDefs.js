@@ -1,6 +1,14 @@
-const { gpl } = require('apollo-server-express');
+const { gql } = require('apollo-server-express');
 
-const typeDefs = gpl
+const typeDefs = gql`
+    type Name{
+        name: String
+    }
+
+    type Query {
+        name: Name
+    }
+`
 
 
 
