@@ -2,39 +2,22 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
-import { Link } from "react-router-dom";
-import RecipeButton from "../components/RecipeButton";
-import FavButton from "../components/FavButton";
-
-
+import RecipeCard from "./RecipeCard";
+import { getVeggie } from "../api/spoonacular";
 
 function Veggie() {
- const [veggie, setVeggie] = useState([]);
+  const [veggie, setVeggie] = useState([]);
 
- //useEffect automatically imports from React - running the getPupuler function only when the component is mounted
- useEffect(() => {
-   getVeggie();
- }, []);
-
- // fetch request to Spoonacular API to find random (veggie) recipes.
- const getVeggie = async () => {
-   const check = localStorage.getItem("veggie");
-
-   if (check) {
-     setVeggie(JSON.parse(check));
-   } else {
-     const api = await fetch(
-       `https://api.spoonacular.com/recipes/random?apiKey=74db62d59a674bbc85356ed301f3b3e2&number=12&tags=vegetarian`
-     );
-     const data = await api.json();
-     localStorage.setItem("veggie", JSON.stringify(data.recipes));
-     setVeggie(data.recipes);
-     console.log(data.recipe)
-   }
- };
-
-
-
+  //useEffect automatically imports from React - running the getPupuler function only when the component is mounted
+  useEffect(() => {
+    getVeggie()
+      .then((recipes) => {
+        setVeggie(recipes);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <div>
@@ -61,21 +44,11 @@ function Veggie() {
           {veggie.map((item) => {
             return (
               <SplideSlide key={item.id}>
-                <Card key={item.id}>
-                  <div>
-                    <img src={item.image} alt="" />
-                    <h4>{item.title}</h4>
-                  </div>
-
-                  <Buttons>
-                    <Link to={"/recipe/" + item.id}>
-                      <RecipeButton />
-                    </Link>
-                    <Link to={"/MyRecipes/"}>
-                      <FavButton />
-                    </Link>
-                  </Buttons>
-                </Card>
+                <RecipeCard
+                  image={item.image}
+                  title={item.title}
+                  id={item.id}
+                />
               </SplideSlide>
             );
           })}
@@ -100,27 +73,4 @@ const Wrapper = styled.div`
   margin-right: 5rem;
   `;
 
-const Card = styled.div`
-  min-height: 20rem;
-  border-radius: 1rem;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 7px;
-  img {
-    width: 100%;
-  }
-  a {
-    text-decoration: none;
-  }
-  h4 {
-    text-align: center;
-    padding: 1rem;
-  }
-`;
-
-const Buttons = styled.div`
-  display: flex;
-`;
 export default Veggie;
