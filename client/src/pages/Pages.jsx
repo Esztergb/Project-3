@@ -8,6 +8,7 @@ import { AnimatePresence } from "framer-motion";
 import SignUp from "./SignUp";
 import Shopping from "./Shopping";
 import MyRecipes from "./MyRecipes";
+import Calendar from "./Calendar";
 import SignIn from "./SignIn";
 
 function Pages() {
@@ -20,6 +21,7 @@ function Pages() {
         <Route path="/searched/:search" element={<Searched />} />
         <Route path="/recipe/:name" element={<Recipe />} />
         <Route path="/myrecipes" element={<MyRecipes />} />
+        <Route path="/calendar" element={<Calendar />} />
         <Route path="/shopping" element={<Shopping />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
