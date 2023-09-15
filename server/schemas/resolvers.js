@@ -3,7 +3,7 @@ const { singToken } = require('../utils');
 
 const resolvers = {
     Query : {
-
+        name: () => ({name: "Len" }) 
     },
     Mutation: {
         login: async (parent , args ) => {
