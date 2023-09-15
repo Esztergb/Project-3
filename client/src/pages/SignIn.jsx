@@ -25,6 +25,7 @@ const SignIn = () => {
   };
 
   return (
+    <div className="md:flex md:justify-center mb-6">
     <form className="w-full max-w-sm" onSubmit={handelFormSubmit}>
       <div className="md:flex md:items-center mb-6">
         <div className="md:w-1/3">
@@ -37,7 +38,7 @@ const SignIn = () => {
         </div>
         <div className="md:w-2/3">
           <input
-            className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+            className="bg-cbrown appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-cbrown"
             name="email"
             type="email"
             value={userFormData.email}
@@ -56,7 +57,7 @@ const SignIn = () => {
         </div>
         <div className="md:w-2/3">
           <input
-            className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+            className="bg-cbrown appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-cbrown"
             name="password"
             type="password"
             value={userFormData.password}
@@ -76,7 +77,7 @@ const SignIn = () => {
         <div className="md:w-1/3"></div>
         <div className="md:w-2/3">
           <button
-            className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+            className="text-cwhite border bg-cbrown border-cbrown hover:bg-transparent hover:text-cbrown rounded-md px-8 py-3"
             type="submit"
           >
             Sign Up
@@ -84,6 +85,7 @@ const SignIn = () => {
         </div>
       </div>
     </form>
+    </div>
   );
 };
 
