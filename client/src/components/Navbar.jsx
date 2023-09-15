@@ -43,6 +43,12 @@ let navigate = useNavigate();
             </li>
             <li className="hover:scale-110">
               {" "}
+              <Link to="/calendar" className="cursor-pointer">
+                Weekly Calendar
+              </Link>
+            </li>
+            <li className="hover:scale-110">
+              {" "}
               <Link to="/shopping" className="cursor-pointer">
                 Shopping List
               </Link>
@@ -52,7 +58,10 @@ let navigate = useNavigate();
 
         {/* SIGN IN/SIGN UP BUTTONS */}
         <div className="hidden md:flex pr-4">
-          <button className="border-none bg-transparent text-cbrown mr-4" onClick={event =>  window.location.href='/signin'}>
+          <button
+            className="border-none bg-transparent text-cbrown mr-4"
+            onClick={(event) => (window.location.href = "/signin")}
+          >
             Sign In
           </button>
           <button className="px-8 py-3" onClick={routeChange}>
@@ -73,9 +82,21 @@ let navigate = useNavigate();
       <ul
         className={!nav ? "hidden" : "md:hidden absolute bg-cgreen w-full px-8"}
       >
-        <li className="border-b-2 border-cdarkgreen w-full">Recipies</li>
-        <li className="border-b-2 border-cdarkgreen w-full">MyRecipes</li>
-        <li className="border-b-2 border-cdarkgreen w-full">Shopping List</li>
+        <li className="border-b-2 border-cdarkgreen w-full">
+          <Link to="/myrecipes" className="cursor-pointer">
+            My Recipes
+          </Link>
+        </li>
+        <li className="border-b-2 border-cdarkgreen w-full">
+          <Link to="/calendar" className="cursor-pointer">
+            Weekly Calendar
+          </Link>
+        </li>
+        <li className="border-b-2 border-cdarkgreen w-full">
+          <Link to="/shopping" className="cursor-pointer">
+            Shopping List
+          </Link>
+        </li>
         {/* buttons */}
         <div className="flex flex-col my-4">
           <button className="bg-transparent text-cbrown px-8 py-3 mb-4">
