@@ -43,7 +43,7 @@ const SLink = styled(NavLink)`
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  margin-right: 2rem;
+  margin-right: 2%;
   text-decoration: none;
   background: linear-gradient(35deg, #715a45, #3a2e23);
   width: 6rem;
