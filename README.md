@@ -63,17 +63,20 @@
 - [Questions](#questions)
 
 ## Description 
-XXX
+The Thyme-for-lunch website was created to search for any recipe and add it to your favorites list, You can add your favorite recipes to a weekly calendar to plan out your meals for the week in order to have all the ingredients from your planned meals added to a grocery list so that you can easily plan out your next grocery run.
+
+
 
 ## User Story
 
-```md
-XXX
-```
+AS A user
+I WANT a website where I can find new recipes, add them to my favorites, have a weekly calendar to plan my meals
+SO THAT I can get a grocery list of ingredients for the week 
+
 
 ## Live-URL
 
-[Deployed Page with Heroku](https://thyme-for-lunch-ca35ba4e7fee.herokuapp.com/)
+Deployed Page with Heroku: https://thyme-for-lunch-ca35ba4e7fee.herokuapp.com/
 
 ## Screenshots
 
@@ -89,7 +92,10 @@ To use the app create a .env file in the server folder and add your API key as f
 
 ## Challanges
 
-XXX
+-Heroku deployment and connection to MongoDB and Mongoose.
+-Movement of Spoonacular API from frontend to backend.
+-GraphQL setup.
+
 
 ## Features
 

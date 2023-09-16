@@ -22,7 +22,9 @@ function Veggie() {
   return (
     <div>
       <Title>
-        <h3 className="#715a45">Vegetarian Picks</h3>
+        <h3 className="font-dancing font-bold text-4xl text-cbrown">
+          Vegetarian Picks
+        </h3>
       </Title>
       <Wrapper>
         <Splide
@@ -31,7 +33,7 @@ function Veggie() {
             arrows: false,
             pagination: false,
             drag: "free",
-            gap: "3rem",
+            gap: "3%",
             breakpoints: {
               1024: { perPage: 3 },
               767: { perPage: 2 },
@@ -62,15 +64,10 @@ const Title = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  h3 {
-    font-weight: 600;
-    font-size: 2rem;
-    color: #715a45;
-  }
 `;
 const Wrapper = styled.div`
-  margin-left: 5rem;
-  margin-right: 5rem;
+  margin-left: 5%;
+  margin-right: 5%;
   `;
 
 export default Veggie;
