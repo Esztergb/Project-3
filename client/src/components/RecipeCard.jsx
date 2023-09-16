@@ -1,11 +1,21 @@
-// RecipeCard.js
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import RecipeButton from "./RecipeButton";
 import FavButton from "./FavButton";
 
 const Card = ({ image, title, id }) => {
+  const [savedRecipes, setSavedRecipes] = useState([]); // State to store saved recipes
+
+  const handleSaveRecipe = (recipe, isSaved) => {
+    if (isSaved) {
+      setSavedRecipes([...savedRecipes, recipe]);
+    } else {
+      // Remove the recipe from savedRecipes
+      const updatedRecipes = savedRecipes.filter((r) => r.id !== recipe.id);
+      setSavedRecipes(updatedRecipes);
+    }
+  };
   return (
     <CardContainer>
       <div>
@@ -16,9 +26,12 @@ const Card = ({ image, title, id }) => {
         <Link to={`/recipe/${id}`}>
           <RecipeButton />
         </Link>
-        <Link to="/MyRecipes/">
-          <FavButton />
-        </Link>
+        <FavButton
+          id={id}
+          image={image}
+          title={title}
+          onSave={handleSaveRecipe}
+        />
       </Buttons>
     </CardContainer>
   );

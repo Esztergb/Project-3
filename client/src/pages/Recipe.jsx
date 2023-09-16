@@ -1,24 +1,27 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
+import { fetchDetails } from "../api/spoonacular";
+
 
    function Recipe() {
     const [details, setDetails] = useState({});
     const [activeTab, setActiveTab] = useState ("instructions");
     let params = useParams();
 
-    const fetchDetails = async () => {
-        const data = await fetch(`https://api.spoonacular.com/recipes/${params.name}/information?apiKey=74db62d59a674bbc85356ed301f3b3e2`);
-
-        const detailData = await data.json();
-        setDetails(detailData);
-        console.log(details)
-    }
-
     useEffect(() => {
-      fetchDetails();
+      if (params.name) {
+        fetchDetails(params.name)
+          .then((recipe) => {
+            setDetails(recipe);
+          })
+          .catch((error) => {
+            console.error(error);
+            // Handle the error here, e.g., show an error message to the user
+          });
+      }
     }, [params.name]);
+
   
   return (
     <DetailWrapper className="flex">

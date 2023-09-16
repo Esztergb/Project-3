@@ -28,3 +28,8 @@ export const getVeggie = async () => {
   const url = `/api/spoonacular/vegetarian`;
   return makeApiRequest(url);
 };
+
+export const fetchDetails = async (recipeName) => {
+  const url = `/api/spoonacular/recipe/details/${recipeName}/`;
+  return makeApiRequest(url);
+}
