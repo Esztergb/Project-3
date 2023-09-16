@@ -28,7 +28,7 @@ const SignIn = () => {
     const [data] = login ({email , password})
   }
   return (
-    <div className="md:flex md:justify-center mb-6">
+    <div className="flex justify-center mb-6 mt-10">
     <form className="w-full max-w-sm" onSubmit={handelFormSubmit}>
       <div className="md:flex md:items-center mb-6">
         <div className="md:w-1/3">

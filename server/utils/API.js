@@ -65,4 +65,19 @@ router.get("/vegetarian", async (req, res) => {
   }
 });
 
+router.get("/recipe/details/:name", async (req, res) => {
+  try {
+    const { name } = req.params;
+    const response = await axios.get(
+      `https://api.spoonacular.com/recipes/${name}/information?apiKey=${apiKey}`
+    );
+    const data = response.data;
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
 module.exports = router;

@@ -1,7 +1,10 @@
-const { User }  = require('../models');
-const { singToken } = require('../utils');
+const { User } = require("../models");
+const { singToken } = require("../utils");
 
 const resolvers = {
+
+module.exports = resolvers;
+
     // Query : {
     //     name: () => ({name: "Len" }) 
     // },
@@ -29,3 +32,4 @@ const resolvers = {
 }
 
 module.exports = resolvers;
+
