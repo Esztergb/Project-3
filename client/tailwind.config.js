@@ -32,6 +32,10 @@ export default {
         corange: "#f27121",
         cred: "#e94057",
       },
+      fontFamily: {
+        dancing: ["Dancing Script", "cursive"], // 'Dancing Script' is the Google Font name
+        // Add more font families as needed
+      },
     },
   },
   plugins: [],
