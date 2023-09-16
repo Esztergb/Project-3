@@ -20,7 +20,7 @@
   margin: 0;
   padding: 0;
   /* box-sizing: border-box; */
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif, 'Dancing';
 }
 
 body {
@@ -39,6 +39,9 @@ h3{
   color: rgb(87, 83, 83);
   line-height: 2.5rem;
   margin: 2rem 0rem;
+}
+h1{
+  font: 'Dancing';
 }
 
 a{

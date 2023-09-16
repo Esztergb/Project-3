@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import "@splidejs/react-splide/css";
 import RecipeCard from "./RecipeCard";
 import { getPopular } from "../api/spoonacular";
@@ -21,7 +22,9 @@ function Popular() {
   return (
     <div>
       <Title>
-        <h3>Popular Picks</h3>
+        <h3 className="font-dancing font-bold text-4xl text-cbrown">
+          Popular Picks
+        </h3>
       </Title>
       <Wrapper>
         <Splide
@@ -30,7 +33,11 @@ function Popular() {
             arrows: false,
             pagination: false,
             drag: "free",
-            gap: "3rem",
+            gap: "3%",
+            // speed: 1000,
+            // autoplay: {
+            // delay: 1000,
+            // },
             breakpoints: {
               1024: { perPage: 3 },
               767: { perPage: 2 },
@@ -60,25 +67,11 @@ const Title = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  h3 {
-    font-weight: 600;
-    font-size: 2rem;
-    color: #715a45;
-  }
 `;
 
 const Wrapper = styled.div`
-  margin-left: 5rem;
-  margin-right: 5rem;
+  margin-left: 5%;
+  margin-right: 5%;
 `;
-
-// const Gradient = styled.div`
-//   z-index: 3;
-//   position: absolute;
-//   width: 100%;
-//   height: 100;
-//   background: linear-gradient(rgba(0, 0, 0, 0)), rgba(0, 0, 0, 0.5);
-// `;
-
 
 export default Popular;

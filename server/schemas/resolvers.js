@@ -3,8 +3,6 @@ const { singToken } = require("../utils");
 
 const resolvers = {
 
-module.exports = resolvers;
-
     // Query : {
     //     name: () => ({name: "Len" }) 
     // },
@@ -32,4 +30,3 @@ module.exports = resolvers;
 }
 
 module.exports = resolvers;
-

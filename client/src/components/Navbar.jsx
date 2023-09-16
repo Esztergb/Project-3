@@ -28,7 +28,9 @@ let navigate = useNavigate();
                 src="/thyme.svg"
                 alt="thyme logo"
               />
-              <h1>Thyme for Lunch</h1>
+              <h1 className="font-dancing font-bold text-4xl text-cbrown">
+                Thyme for Lunch
+              </h1>
             </Logo>
           </Nav>
         </div>
@@ -115,7 +117,7 @@ const Logo = styled(Link)`
   font-weight: 400;
 `;
 const Nav = styled.div`
-  padding: 4rem 0rem;
+  padding: 3rem 0rem;
   display: flex;
   justify-content: flex-start;
   align-items: center;
