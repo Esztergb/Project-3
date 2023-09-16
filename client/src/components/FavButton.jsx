@@ -1,15 +1,30 @@
-import React from 'react'
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FaRegHeart } from "react-icons/fa";
 
+function FavButton({ id, image, title, onSave }) {
+  const [isSaved, setIsSaved] = useState(false);
+
+  // Handle the click event on the FavButton
+  const handleSaveClick = () => {
+    // Toggle the saved state
+    const updatedIsSaved = !isSaved;
+
+    // Create a recipe object with ID, image, and title
+    const recipe = { id, image, title };
+
+    // Call the onSave function passed from the parent component (Searched.jsx)
+    onSave(recipe, updatedIsSaved);
+
+    // Update the state after the save operation is complete
+    setIsSaved(updatedIsSaved);
+  };
 
 
-function Favbutton() {
   return (
-    <Button>
+    <Button onClick={handleSaveClick} className={isSaved ? 'active' : ''}>
       <div>
-      <FaRegHeart></FaRegHeart>
-     
+        <FaRegHeart></FaRegHeart>
       </div>
     </Button>
   );
@@ -44,4 +59,4 @@ const Button = styled.button`
     }
   }
 `;
-export default Favbutton
+export default FavButton;

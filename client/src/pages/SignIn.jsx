@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 // import { useMutation } from "@apollo/client";
 // import { LOGIN_USER } from "../utils/mutations";
-// import auth from "../utils/auth";
+import auth from "../utils/auth";
 
 const SignIn = () => {
   const [userFormData, setUserFormData] = useState({ 
@@ -24,8 +24,11 @@ const SignIn = () => {
     console.log(userFormData);
   };
 
+  const handelLogin = () => {
+    const [data] = login ({email , password})
+  }
   return (
-    <div className="md:flex md:justify-center mb-6">
+    <div className="flex justify-center mb-6 mt-10">
     <form className="w-full max-w-sm" onSubmit={handelFormSubmit}>
       <div className="md:flex md:items-center mb-6">
         <div className="md:w-1/3">
@@ -79,8 +82,9 @@ const SignIn = () => {
           <button
             className="text-cwhite border bg-cbrown border-cbrown hover:bg-transparent hover:text-cbrown rounded-md px-8 py-3"
             type="submit"
+            onClick={handelLogin}
           >
-            Sign Up
+            Sign In
           </button>
         </div>
       </div>

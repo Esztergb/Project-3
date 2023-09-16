@@ -1,10 +1,13 @@
-const { User }  = require('../models');
-const { singToken } = require('../utils');
+const { User } = require("../models");
+const { singToken } = require("../utils");
 
 const resolvers = {
-    Query : {
-        name: () => ({name: "Len" }) 
-    },
+
+module.exports = resolvers;
+
+    // Query : {
+    //     name: () => ({name: "Len" }) 
+    // },
     Mutation: {
         login: async (parent , args ) => {
             const user = await User.findOne({ email: args.email });
@@ -19,11 +22,14 @@ const resolvers = {
             const token = singToken(user);
             return { token , user };
         },
-        addUser: async ( parent , args ) => {
-            const user = await User.create(args);
-            const token = singToken(user);
-            return { token , user };
-        },
+        // addUser: async ( parent , args ) => {
+        //     const user = await User.create(args);
+        //     const token = singToken(user);
+        //     return { token , user };
+        // },
         
     }
 }
+
+module.exports = resolvers;
+
