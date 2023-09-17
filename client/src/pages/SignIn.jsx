@@ -100,7 +100,7 @@ const SignIn = () => {
               name="password"
               type="password"
               value={userFormData.password}
-              placeholder="Your Password"
+              placeholder=""
               onChange={handleInputChange}
             />
           </div>

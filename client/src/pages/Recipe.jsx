@@ -30,7 +30,7 @@ import { fetchDetails } from "../utils/API";
         <img src={details.image} alt="" />
       </LeftColumn>
 
-      <RightColumn className="pl-[5rem] basis-2/3">
+      <RightColumn className="basis-2/3">
         <ButtonContainer>
           <Button
             className={activeTab === "instructions" ? "active" : ""}
@@ -109,7 +109,7 @@ const DetailWrapper = styled.div`
 
 const RightColumn = styled.div`
   width: 66.66%;
-  padding-left: 5rem;
+  padding-left: 5%;
   display: flex;
   flex-direction: column;
   align-items: ${({ smallScreen }) => (smallScreen ? "center" : "flex-start")};
@@ -131,7 +131,7 @@ const Button = styled.button`
   padding: 1rem 2rem;
   color: #715a45;
   background: #fdfaef;
-  margin-right: 2rem;
+  /* margin-right: 2rem; */
   margin-bottom: 2rem;
   font-weight: 600;
   transform: scale(0.8);
