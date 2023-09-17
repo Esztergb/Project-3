@@ -23,6 +23,7 @@ const resolvers = {
         throw new Error("incorrect credentials");
       }
       const token = signToken(user);
+
       return { token, user };
     },
     addUser: async (parent, args) => {
