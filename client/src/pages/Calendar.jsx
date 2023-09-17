@@ -2,7 +2,7 @@ import React from 'react'
 
 function Calendar() {
   return (
-    <div className="mx-[5rem] my-[5rem]">
+    <div className="mx-[5%] my-[5%]">
       <div className="flex">
         {/* Left Column (1/3 of the screen) */}
         <div className="w-1/3 bg- p-4">
