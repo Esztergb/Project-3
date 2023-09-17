@@ -67,11 +67,12 @@ const SignUp = () => {
 
   return (
     <div className="flex justify-center mb-6 mt-10">
-      <form
-        noValidate
-        className="w-full max-w-sm"
-        onSubmit={handleFormSubmit}
-      >
+      <form noValidate className="w-full max-w-sm" onSubmit={handleFormSubmit}>
+        {showAlert && (
+          <div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+            Something went wrong with your login credentials!
+          </div>
+        )}
         <div className="md:flex md:items-center mb-6">
           <div className="md:w-1/3">
             <label
@@ -125,7 +126,7 @@ const SignUp = () => {
               name="password"
               type="password"
               value={userFormData.password}
-              placeholder="***************"
+              placeholder=""
               onChange={handleInputChange}
             />
           </div>
@@ -154,11 +155,11 @@ const SignUp = () => {
           </div>
         </div>
       </form>
-      {showAlert && (
+      {/* {showAlert && (
         <div className="mt-4 p-3 bg-red-500 text-white">
           Something went wrong with your signup!
         </div>
-      )}
+      )} */}
     </div>
   );
 };
