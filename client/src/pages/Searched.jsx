@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { useParams } from "react-router-dom";
-import { getSearchedRecipes } from "../api/spoonacular";
+import { getSearchedRecipes } from "../utils/API";
 import RecipeCard from "../components/RecipeCard";
 
 function Searched() {

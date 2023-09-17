@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import RecipeCard from "./RecipeCard";
-import { getVeggie } from "../api/spoonacular";
+import { getVeggie } from "../utils/API";
 
 function Veggie() {
   const [veggie, setVeggie] = useState([]);
