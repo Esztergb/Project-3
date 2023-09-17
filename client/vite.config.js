@@ -14,11 +14,11 @@ export default defineConfig({
         secure: false,
       },
 
-      // "/graphql": {
-      //   target: "http://localhost:3001",
-      //   changeOrigin: true,
-      //   secure: false,
-      // },
+      "/graphql": {
+        target: "http://localhost:3001",
+        changeOrigin: true,
+        secure: false,
+      },
     },
   },
 });
