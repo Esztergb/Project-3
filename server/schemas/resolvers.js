@@ -1,5 +1,5 @@
 const { User } = require("../models");
-const { singToken } = require("../utils");
+const { signToken } = require("../utils");
 
 const resolvers = {
     // Query : {
@@ -17,12 +17,12 @@ const resolvers = {
       if (!isCorrectPassword) {
         throw new Error("Incorrect Credentials");
       }
-      const token = singToken(user);
+      const token = signToken(user);
       return { token, user };
     },
     // addUser: async ( parent , args ) => {
         //     const user = await User.create(args);
-        //     const token = singToken(user);
+        //     const token = signToken(user);
         //     return { token , user };
         // },
   },
