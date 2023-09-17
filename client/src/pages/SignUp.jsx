@@ -1,29 +1,77 @@
 import { useState } from "react";
 
+// import { createUser } from '../utils/API';
+import Auth from "../utils/auth";
+import { useMutation } from "@apollo/client";
+import { ADD_USER } from "../utils/mutations";
+
 const SignUp = () => {
+  const [addUser] = useMutation(ADD_USER);
+  // set initial form state
   const [userFormData, setUserFormData] = useState({
+    username: "",
     email: "",
     password: "",
-    username: "",
   });
-  const [validated] = useState(false);
+ 
+  // set state for alert
   const [showAlert, setShowAlert] = useState(false);
-  // const [login] = useMutation(LOGIN_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
 
-  const handelFormSubmit = async (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    console.log(userFormData);
+    // check if form has everything (as per react-bootstrap docs)
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    try {
+      // const response = await createUser(userFormData);
+      const response = await addUser({
+        variables: {
+          username: userFormData.username,
+          email: userFormData.email,
+          password: userFormData.password,
+        },
+      });
+
+      if (!response) {
+        throw new Error("something went wrong!");
+      }
+
+      // Use Use mutation hook to pass in variables from mutations.js (import function from apollo hook and mutations/queries.js)
+
+      const { token, user } = response.data.addUser;
+      console.log(user);
+      Auth.login(token);
+
+      console.log("LOGGGIN IN WORKING");
+    } catch (err) {
+      console.error(err);
+      setShowAlert(true);
+    }
+
+    setUserFormData({
+      username: "",
+      email: "",
+      password: "",
+    });
   };
 
   return (
     <div className="flex justify-center mb-6 mt-10">
-      <form className="w-full max-w-sm" onSubmit={handelFormSubmit}>
+      <form
+        noValidate
+        className="w-full max-w-sm"
+        onSubmit={handleFormSubmit}
+      >
         <div className="md:flex md:items-center mb-6">
           <div className="md:w-1/3">
             <label
@@ -77,7 +125,7 @@ const SignUp = () => {
               name="password"
               type="password"
               value={userFormData.password}
-              placeholder="******************"
+              placeholder="***************"
               onChange={handleInputChange}
             />
           </div>
@@ -93,6 +141,11 @@ const SignUp = () => {
           <div className="md:w-1/3"></div>
           <div className="md:w-2/3">
             <button
+              disabled={
+                !userFormData.username ||
+                !userFormData.email ||
+                !userFormData.password
+              }
               className="text-cwhite border bg-cbrown border-cbrown hover:bg-transparent hover:text-cbrown rounded-md px-8 py-3"
               type="submit"
             >
@@ -101,6 +154,11 @@ const SignUp = () => {
           </div>
         </div>
       </form>
+      {showAlert && (
+        <div className="mt-4 p-3 bg-red-500 text-white">
+          Something went wrong with your signup!
+        </div>
+      )}
     </div>
   );
 };
