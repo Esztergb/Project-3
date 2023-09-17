@@ -1,13 +1,12 @@
-import React, {useState} from 'react'
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { MenuIcon, XIcon } from '@heroicons/react/outline'
+import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import styled from "styled-components";
 import Auth from "../utils/auth";
 
-
 function Navbar() {
   // swich over from regular menu to hamburger menu
-  const [nav, setNav] = useState(false); //default
+  const [ nav, setNav ] = useState(false); //default
   const handleClick = () => setNav(!nav);
 
   // const handleClose = () => setNav(!nav);
@@ -16,13 +15,12 @@ function Navbar() {
     let path = `/signup`;
     navigate(path);
   };
-  
+
   const loggedIn = Auth.loggedIn(); // Check if the user is logged in
 
   const handleSignOut = () => {
     Auth.logout(); // Call the logout method from AuthService
   };
-
 
   return (
     <div className="w-screen h-[80px] z-10 fixed drop-shadow-md bg-cgreen">
@@ -81,7 +79,7 @@ function Navbar() {
             </button>
           ) : (
             <button
-              className="bg-transparent text-cbrown px-8 py-3 mb-4"
+              className="bg-corange text-cwhite px-8 py-3"
               onClick={handleSignOut}
             >
               Sign Out
@@ -127,14 +125,27 @@ function Navbar() {
             </li>
           </>
         )}
-        {!loggedIn && (
+        {!loggedIn ? (
           <div className="flex flex-col my-4">
             <button className="bg-transparent text-cbrown px-8 py-3 mb-4">
               Sign In
             </button>
-            <button className="px-8 py-3" onClick={routeChange}>
-              Sign Up
+          </div>
+        ) : (
+          <div className="flex flex-col my-4">
+            {/* Sign Out button */}
+            <button
+              className="bg-corange text-cwhite px-8 py-3"
+              onClick={handleSignOut}
+            >
+              Sign Out
             </button>
+            {/* Sign Up button */}
+            {!loggedIn && (
+              <button className="px-8 py-3" onClick={routeChange}>
+                Sign Up
+              </button>
+            )}
           </div>
         )}
       </ul>
@@ -142,19 +153,21 @@ function Navbar() {
   );
 }
 
+
 const Logo = styled(Link)`
-  text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: 400;
+text-decoration: none;
+font-size: 1.5rem;
+font-weight: 400;
 `;
+
 const Nav = styled.div`
-  padding: 3rem 0rem;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  svg {
+padding: 3rem 0rem;
+display: flex;
+justify-content: flex-start;
+align-items: center;
+ svg {
     font-size: 2rem;
   }
 `;
 
-export default Navbar
+export default Navbar;
