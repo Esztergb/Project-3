@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { motion } from 'framer-motion';
 import { useParams } from 'react-router-dom'; //useParams pulls out keyword from URL
 import RecipeCard from "../components/RecipeCard";
-import { getCuisine } from "../api/spoonacular";
+import { getCuisine } from "../utils/API";
 
 function Cuisine() {
   const [cuisine, setCuisine] = useState([]);
