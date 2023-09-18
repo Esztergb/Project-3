@@ -12,20 +12,33 @@ function MyRecipes() {
   const savedRecipes = data.me.savedRecipes;
 
   return (
-    <Grid>
-      {savedRecipes.map((recipe) => {
-        return (
-          <RecipeCard
-            key={recipe.recipeId} // Use recipeId as the key
-            image={recipe.image}
-            title={recipe.title}
-            id={recipe.recipeId} // Use recipeId as the id
-          />
-        );
-      })}
-    </Grid>
+    <div>
+      <Title>
+        <h3 className="font-dancing font-bold text-4xl text-cbrown">
+          Welcome, User!
+        </h3>
+      </Title>
+      <Grid>
+        {savedRecipes.map((recipe) => {
+          return (
+            <RecipeCard
+              key={recipe.recipeId} // Use recipeId as the key
+              image={recipe.image}
+              title={recipe.title}
+              id={recipe.recipeId} // Use recipeId as the id
+            />
+          );
+        })}
+      </Grid>
+    </div>
   );
 }
+
+const Title = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Grid = styled.div`
   display: grid;

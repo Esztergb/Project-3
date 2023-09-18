@@ -17,7 +17,7 @@ function Cuisine() {
       .catch((error) => {
         console.error(error);
       });
-    console.log(params.type);
+    console.log('Recipes: ' + params.type);
   }, [params.type]);
 
   return (
