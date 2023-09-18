@@ -49,7 +49,7 @@ const SignUp = () => {
       // Use Use mutation hook to pass in variables from mutations.js (import function from apollo hook and mutations/queries.js)
 
       const { token, user } = response.data.addUser;
-      console.log(user);
+      console.log('this is: ' + user);
       Auth.login(token);
 
       console.log("LOGGGIN IN WORKING");
