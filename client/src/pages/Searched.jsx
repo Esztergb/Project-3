@@ -3,10 +3,17 @@ import { styled } from "styled-components";
 import { useParams } from "react-router-dom";
 import { getSearchedRecipes } from "../utils/API";
 import RecipeCard from "../components/RecipeCard";
+import { getSavedRecipeIds } from "../utils/localStorage";
 
 function Searched() {
+
+  // create state for holding returned google api data
   const [searchedRecipies, setSearchedRecipies] = useState([]);
   const params = useParams();
+  // create state to hold saved bookId values
+  const [savedRecipeIds] = useState(getSavedRecipeIds());
+
+  // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
 
   useEffect(() => {
     // Use the new function to fetch data from the server
@@ -28,6 +35,7 @@ function Searched() {
             image={item.image}
             title={item.title}
             id={item.id}
+            isSaved={savedRecipeIds.includes(item.id)}
           />
         );
       })}

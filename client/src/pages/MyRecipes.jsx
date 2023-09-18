@@ -1,25 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import RecipeCard from "../components/RecipeCard"
+import RecipeCard from "../components/RecipeCard";
+import { useQuery } from "@apollo/client";
+import { GET_ME } from "../utils/queries"
 
 function MyRecipes() {
-  // Create state to store saved recipes
-  const [savedRecipes, setSavedRecipes] = useState([]);
-  return (
+    // Use the useQuery hook to fetch data
+  const { loading, error, data } = useQuery(GET_ME);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+  const savedRecipes = data.me.savedRecipes;
 
+  return (
     <Grid>
-      {savedRecipes.map((item) => {
+      {savedRecipes.map((recipe) => {
         return (
           <RecipeCard
-            key={item.id}
-            image={item.image}
-            title={item.title}
-            id={item.id}
+            key={recipe.recipeId} // Use recipeId as the key
+            image={recipe.image}
+            title={recipe.title}
+            id={recipe.recipeId} // Use recipeId as the id
           />
         );
       })}
     </Grid>
-  
   );
 }
 
