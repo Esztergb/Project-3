@@ -2,14 +2,74 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import Auth from "../utils/auth";
+import { getSavedRecipeIds } from "../utils/localStorage"; 
+import { useMutation } from "@apollo/client";
+import { SAVE_RECIPE, REMOVE_RECIPE } from "../utils/mutations";
 import { GiCookingPot } from "react-icons/gi";
 import { FaRegHeart } from "react-icons/fa";
 // import { AiFillDelete } from 'react-icons/ai'
 
 const Card = ({ image, title, id }) => {
-  
+  const [isSaved, setIsSaved] = useState(getSavedRecipeIds().includes(id));
+  const [showLoginMessage, setShowLoginMessage] = useState(false);
+   const [saveRecipe] = useMutation(SAVE_RECIPE, {
+     onError: (error) => {
+       console.error(error);
+     },
+   });
+
+   const [removeRecipe] = useMutation(REMOVE_RECIPE, {
+     onError: (error) => {
+       console.error(error);
+     },
+   });
+
+  const handleSaveClick = async () => {
+    if (!Auth.loggedIn()) {
+      // Check if the user is logged in
+      setShowLoginMessage(true);
+      return;
+    }
+    try {
+      if (isSaved) {
+        // If already saved, remove it from saved recipes
+        await removeRecipe({
+          variables: {
+            recipeId: id.toString(), // Convert id to string
+          },
+        });
+      } else {
+        // If not saved, add it to saved recipes
+        await saveRecipe({
+          variables: {
+            input: {
+              recipeId: id.toString(), // Convert id to string
+              title: title,
+              image: image,
+            },
+          },
+        });
+      }
+      setIsSaved(!isSaved);
+    } catch (error) {
+      if (error.message.includes("user not found")) {
+        // Handle the case where the user is not found
+        // This could be a server-side issue
+        console.error("User not found:", error);
+      } else {
+        // Handle other types of errors
+        console.error("Error:", error);
+      }
+    }
+  }
+
+
   return (
     <CardContainer>
+      {showLoginMessage && (
+        <LoginMessage>Please log in to save recipes.</LoginMessage>
+      )}
       <div>
         <img src={image} alt="" />
         <h4>{title}</h4>
@@ -23,16 +83,14 @@ const Card = ({ image, title, id }) => {
           </Link>
         </Button>
 
-        <Button id={id}>
-          <FaRegHeart></FaRegHeart>
+        <Button id={id} onClick={handleSaveClick}>
+          <FaRegHeart color={isSaved ? "#e94057" : "#f7f0d9"}></FaRegHeart>
         </Button>
-        {/* <Button id={id}>
-          <AiFillDelete></AiFillDelete>
-        </Button> */}
       </Buttons>
     </CardContainer>
   );
 };
+
 
 const CardContainer = styled.div`
   min-height: 20rem;
@@ -57,6 +115,13 @@ const CardContainer = styled.div`
     margin: 0;
     padding-top: 2%;
   }
+`;
+
+const LoginMessage = styled.div`
+  text-align: center;
+  color: red;
+  font-weight: bold;
+  margin-bottom: 10px;
 `;
 
 const Buttons = styled.div`
