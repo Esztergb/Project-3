@@ -12,7 +12,7 @@ function MyRecipes() {
   const [removeRecipe] = useMutation(REMOVE_RECIPE);
   const userData = data?.me;
   useEffect(() => {
-    console.log(`userData: ${data}`);
+    console.log(`userData: ${JSON.stringify(userData)}`);
   }, [data, loading]) 
 
   // create function that accepts the recipe's mongo _id value as param and deletes the recipe from the database
@@ -59,10 +59,10 @@ function MyRecipes() {
         {userData?.savedRecipes.map((recipe) => {
           return (
             <RecipeCard
-              key={recipe.recipeId} // Use recipeId as the key
+              key={recipe.Id} // Use recipeId as the key
               image={recipe.image}
               title={recipe.title}
-              id={recipe.recipeId} // Use recipeId as the id
+              id={recipe.Id} // Use recipeId as the id
             />
           );
         })}
