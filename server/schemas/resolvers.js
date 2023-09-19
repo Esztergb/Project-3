@@ -4,9 +4,10 @@ const { signToken } = require("../utils/auth");
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
-      console.log('Dis Me: '+ context.user);
+      console.log(JSON.stringify(context.user));
       if (context.user) {
-        return User.findOne({ _id: context.user._id });
+        const user = await User.findOne({ _id: context.user._id })
+        return user;
       }
       throw new Error("user not found");
     },

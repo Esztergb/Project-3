@@ -16,8 +16,8 @@ const typeDefs = gql`
   }
 
   type Recipe {
-    recipeId: ID!
-    title: String!
+    recipeId: ID
+    title: String
     image: String
   }
 
