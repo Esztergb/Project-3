@@ -60,10 +60,10 @@ function MyRecipes() {
         {userData?.savedRecipes.map((recipe) => {
           return (
             <RecipeCard
-              key={recipe.Id} // Use recipeId as the key
+              key={recipe.recipeId} // Use recipeId as the key
               image={recipe.image}
               title={recipe.title}
-              id={recipe.Id}
+              id={recipe.recipeId}
               onDelete={handleDeleteRecipe}
               showDeleteButton={true} // Use recipeId as the id
             />

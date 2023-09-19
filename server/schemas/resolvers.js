@@ -52,6 +52,7 @@ const resolvers = {
       throw new Error("user not found");
     },
     removeRecipe: async (parent, args, context) => {
+      console.log("Remove Recipe Mutation - Received recipeId:", args.recipeId);
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           {
