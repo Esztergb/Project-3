@@ -10,7 +10,7 @@ import { GiCookingPot } from "react-icons/gi";
 import { FaRegHeart } from "react-icons/fa";
 import { AiFillDelete } from 'react-icons/ai'
 
-const Card = ({ image, title, id, showDeleteButton }) => {
+const Card = ({ image, title, id, showDeleteButton, showFavoriteButton }) => {
   const [isSaved, setIsSaved] = useState(getSavedRecipeIds().includes(id));
   const [showLoginMessage, setShowLoginMessage] = useState(false);
   const [saveRecipe] = useMutation(SAVE_RECIPE, {
@@ -65,11 +65,16 @@ const Card = ({ image, title, id, showDeleteButton }) => {
   };
 
   const handleDeleteClick = async () => {
-    // Add your delete logic here
+   console.log("Delete button clicked for ID:", id); 
     try {
-      // Delete the recipe and update the UI accordingly
-      // You can use the removeRecipe mutation or any other method you prefer
-      // ...
+      if(id) {
+      // Call the removeRecipe mutation to delete the recipe
+      await removeRecipe({
+        variables: {
+          recipeId: id.toString(),
+        },
+      });
+      }
     } catch (error) {
       console.error("Error deleting recipe:", error);
     }
@@ -93,11 +98,12 @@ const Card = ({ image, title, id, showDeleteButton }) => {
             </div>
           </Link>
         </Button>
-
-        <Button id={id} onClick={handleSaveClick}>
+        {showFavoriteButton && 
+        (<Button id={id} onClick={handleSaveClick}>
           <FaRegHeart color={isSaved ? "#e94057" : "#f7f0d9"}></FaRegHeart>
         </Button>
-
+        )}
+        
         {showDeleteButton &&
           Auth.loggedIn() && ( // Render the delete button only if the user is logged in
             <Button onClick={handleDeleteClick}>

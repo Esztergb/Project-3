@@ -17,6 +17,7 @@ function MyRecipes() {
 
   // create function that accepts the recipe's mongo _id value as param and deletes the recipe from the database
   const handleDeleteRecipe = async (recipeId) => {
+    
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -37,6 +38,7 @@ function MyRecipes() {
 
       // upon success, remove recipe's id from localStorage
       removeRecipeId(recipeId);
+      console.log("Recipe deleted successfully");
     } catch (err) {
       console.error(err);
     }
@@ -61,7 +63,9 @@ function MyRecipes() {
               key={recipe.Id} // Use recipeId as the key
               image={recipe.image}
               title={recipe.title}
-              id={recipe.Id} // Use recipeId as the id
+              id={recipe.Id}
+              onDelete={handleDeleteRecipe}
+              showDeleteButton={true} // Use recipeId as the id
             />
           );
         })}
@@ -79,7 +83,7 @@ const Title = styled.div`
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-  grid-gap: 3%;
+  grid-gap: 3rem;
   margin: 5%;
 `;
 export default MyRecipes;

@@ -35,6 +35,7 @@ function Searched() {
             image={item.image}
             title={item.title}
             id={item.id}
+            showFavoriteButton={true}
             isSaved={savedRecipeIds.includes(item.id)}
           />
         );
