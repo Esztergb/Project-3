@@ -13,7 +13,7 @@ function MyRecipes() {
   const userData = data?.me;
   useEffect(() => {
     console.log(`userData: ${JSON.stringify(userData)}`);
-  }, [data, loading]) 
+  }, [data, loading, userData]) 
 
   // create function that accepts the recipe's mongo _id value as param and deletes the recipe from the database
   const handleDeleteRecipe = async (recipeId) => {
@@ -52,9 +52,9 @@ function MyRecipes() {
   return (
     <div>
       <Title>
-        <h3 className="font-dancing font-bold text-4xl text-cbrown">
+        <WelcomeMessage>
           Welcome, {userData?.username}!
-        </h3>
+        </WelcomeMessage>
       </Title>
       <Grid>
         {userData?.savedRecipes.map((recipe) => {
@@ -78,6 +78,14 @@ const Title = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const WelcomeMessage = styled.h3`
+  font-family: "Dancing Script", cursive;
+  font-weight: bold;
+  font-size: 4rem;
+  color: #715a45;
+  text-transform: capitalize; /* Apply the text-transform style */
 `;
 
 const Grid = styled.div`
