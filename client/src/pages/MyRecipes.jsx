@@ -11,7 +11,9 @@ function MyRecipes() {
   const { loading, data } = useQuery(GET_ME);
   const [removeRecipe] = useMutation(REMOVE_RECIPE);
   const userData = data?.me;
-  console.log(`userData: ${userData}`);
+  useEffect(() => {
+    console.log(`userData: ${data}`);
+  }, [data, loading]) 
 
   // create function that accepts the recipe's mongo _id value as param and deletes the recipe from the database
   const handleDeleteRecipe = async (recipeId) => {
