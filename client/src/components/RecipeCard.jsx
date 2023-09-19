@@ -8,22 +8,22 @@ import { useMutation } from "@apollo/client";
 import { SAVE_RECIPE, REMOVE_RECIPE } from "../utils/mutations";
 import { GiCookingPot } from "react-icons/gi";
 import { FaRegHeart } from "react-icons/fa";
-// import { AiFillDelete } from 'react-icons/ai'
+import { AiFillDelete } from 'react-icons/ai'
 
-const Card = ({ image, title, id }) => {
+const Card = ({ image, title, id, showDeleteButton, showFavoriteButton }) => {
   const [isSaved, setIsSaved] = useState(getSavedRecipeIds().includes(id));
   const [showLoginMessage, setShowLoginMessage] = useState(false);
-   const [saveRecipe] = useMutation(SAVE_RECIPE, {
-     onError: (error) => {
-       console.error(error);
-     },
-   });
+  const [saveRecipe] = useMutation(SAVE_RECIPE, {
+    onError: (error) => {
+      console.error(error);
+    },
+  });
 
-   const [removeRecipe] = useMutation(REMOVE_RECIPE, {
-     onError: (error) => {
-       console.error(error);
-     },
-   });
+  const [removeRecipe] = useMutation(REMOVE_RECIPE, {
+    onError: (error) => {
+      console.error(error);
+    },
+  });
 
   const handleSaveClick = async () => {
     if (!Auth.loggedIn()) {
@@ -62,9 +62,25 @@ const Card = ({ image, title, id }) => {
         console.error("Error:", error);
       }
     }
-  }
+  };
 
+  const handleDeleteClick = async () => {
+   console.log("Delete button clicked for ID:", id); 
+    try {
+      if(id) {
+      // Call the removeRecipe mutation to delete the recipe
+      await removeRecipe({
+        variables: {
+          recipeId: id.toString(),
+        },
+      });
+      }
+    } catch (error) {
+      console.error("Error deleting recipe:", error);
+    }
+  };
 
+ 
   return (
     <CardContainer>
       {showLoginMessage && (
@@ -82,10 +98,18 @@ const Card = ({ image, title, id }) => {
             </div>
           </Link>
         </Button>
-
-        <Button id={id} onClick={handleSaveClick}>
+        {showFavoriteButton && 
+        (<Button id={id} onClick={handleSaveClick}>
           <FaRegHeart color={isSaved ? "#e94057" : "#f7f0d9"}></FaRegHeart>
         </Button>
+        )}
+        
+        {showDeleteButton &&
+          Auth.loggedIn() && ( // Render the delete button only if the user is logged in
+            <Button onClick={handleDeleteClick}>
+              <AiFillDelete></AiFillDelete>
+            </Button>
+          )}
       </Buttons>
     </CardContainer>
   );
@@ -94,6 +118,7 @@ const Card = ({ image, title, id }) => {
 
 const CardContainer = styled.div`
   min-height: 20rem;
+  /* max-width: 20rem; */
   border-radius: 1rem;
   overflow: hidden;
   position: relative;
@@ -102,7 +127,7 @@ const CardContainer = styled.div`
   border-radius: 7px;
   display: flex;
   flex-direction: column;
-
+  
   img {
     width: 100%;
   }

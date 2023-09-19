@@ -13,10 +13,11 @@ function MyRecipes() {
   const userData = data?.me;
   useEffect(() => {
     console.log(`userData: ${JSON.stringify(userData)}`);
-  }, [data, loading]) 
+  }, [data, loading, userData]) 
 
   // create function that accepts the recipe's mongo _id value as param and deletes the recipe from the database
   const handleDeleteRecipe = async (recipeId) => {
+    
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -37,6 +38,7 @@ function MyRecipes() {
 
       // upon success, remove recipe's id from localStorage
       removeRecipeId(recipeId);
+      console.log("Recipe deleted successfully");
     } catch (err) {
       console.error(err);
     }
@@ -46,23 +48,24 @@ function MyRecipes() {
   if (loading) {
     return <h2>LOADING...</h2>;
   }
- 
 
   return (
     <div>
       <Title>
-        <h3 className="font-dancing font-bold text-4xl text-cbrown">
+        <WelcomeMessage>
           Welcome, {userData?.username}!
-        </h3>
+        </WelcomeMessage>
       </Title>
       <Grid>
         {userData?.savedRecipes.map((recipe) => {
           return (
             <RecipeCard
-              key={recipe.Id} // Use recipeId as the key
+              key={recipe.recipeId} // Use recipeId as the key
               image={recipe.image}
               title={recipe.title}
-              id={recipe.Id} // Use recipeId as the id
+              id={recipe.recipeId}
+              onDelete={handleDeleteRecipe}
+              showDeleteButton={true} // Use recipeId as the id
             />
           );
         })}
@@ -77,10 +80,18 @@ const Title = styled.div`
   align-items: center;
 `;
 
+const WelcomeMessage = styled.h3`
+  font-family: "Dancing Script", cursive;
+  font-weight: bold;
+  font-size: 4rem;
+  color: #715a45;
+  text-transform: capitalize; /* Apply the text-transform style */
+`;
+
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-  grid-gap: 3%;
+  grid-gap: 3rem;
   margin: 5%;
 `;
 export default MyRecipes;

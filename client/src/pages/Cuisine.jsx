@@ -34,6 +34,7 @@ function Cuisine() {
             image={item.image}
             title={item.title}
             id={item.id}
+            showFavoriteButton={true}
           />
         );
       })}
