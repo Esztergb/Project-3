@@ -8,22 +8,22 @@ import { useMutation } from "@apollo/client";
 import { SAVE_RECIPE, REMOVE_RECIPE } from "../utils/mutations";
 import { GiCookingPot } from "react-icons/gi";
 import { FaRegHeart } from "react-icons/fa";
-// import { AiFillDelete } from 'react-icons/ai'
+import { AiFillDelete } from 'react-icons/ai'
 
-const Card = ({ image, title, id }) => {
+const Card = ({ image, title, id, showDeleteButton }) => {
   const [isSaved, setIsSaved] = useState(getSavedRecipeIds().includes(id));
   const [showLoginMessage, setShowLoginMessage] = useState(false);
-   const [saveRecipe] = useMutation(SAVE_RECIPE, {
-     onError: (error) => {
-       console.error(error);
-     },
-   });
+  const [saveRecipe] = useMutation(SAVE_RECIPE, {
+    onError: (error) => {
+      console.error(error);
+    },
+  });
 
-   const [removeRecipe] = useMutation(REMOVE_RECIPE, {
-     onError: (error) => {
-       console.error(error);
-     },
-   });
+  const [removeRecipe] = useMutation(REMOVE_RECIPE, {
+    onError: (error) => {
+      console.error(error);
+    },
+  });
 
   const handleSaveClick = async () => {
     if (!Auth.loggedIn()) {
@@ -62,9 +62,20 @@ const Card = ({ image, title, id }) => {
         console.error("Error:", error);
       }
     }
-  }
+  };
 
+  const handleDeleteClick = async () => {
+    // Add your delete logic here
+    try {
+      // Delete the recipe and update the UI accordingly
+      // You can use the removeRecipe mutation or any other method you prefer
+      // ...
+    } catch (error) {
+      console.error("Error deleting recipe:", error);
+    }
+  };
 
+ 
   return (
     <CardContainer>
       {showLoginMessage && (
@@ -86,6 +97,13 @@ const Card = ({ image, title, id }) => {
         <Button id={id} onClick={handleSaveClick}>
           <FaRegHeart color={isSaved ? "#e94057" : "#f7f0d9"}></FaRegHeart>
         </Button>
+
+        {showDeleteButton &&
+          Auth.loggedIn() && ( // Render the delete button only if the user is logged in
+            <Button onClick={handleDeleteClick}>
+              <AiFillDelete></AiFillDelete>
+            </Button>
+          )}
       </Buttons>
     </CardContainer>
   );
