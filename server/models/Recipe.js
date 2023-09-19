@@ -1,8 +1,10 @@
 const { Schema } = require("mongoose");
 
 const recipeSchema = new Schema({
-  recipe: {
+  // saved recipe id from spoonacular
+  recipeId: {
     type: String,
+    required: true,
   },
   image: {
     type: String,

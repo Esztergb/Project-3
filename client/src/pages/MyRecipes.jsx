@@ -1,25 +1,60 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import RecipeCard from "../components/RecipeCard";
-import { useQuery } from "@apollo/client";
-import { GET_ME } from "../utils/queries"
+import Auth from "../utils/auth";
+import { removeRecipeId } from "../utils/localStorage";
+import { useMutation, useQuery } from "@apollo/client";
+import { REMOVE_RECIPE } from "../utils/mutations";
+import { GET_ME } from "../utils/queries";
 
 function MyRecipes() {
-    // Use the useQuery hook to fetch data
-  const { loading, error, data } = useQuery(GET_ME);
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-  const savedRecipes = data.me.savedRecipes;
+  const { loading, data } = useQuery(GET_ME);
+  const [removeRecipe] = useMutation(REMOVE_RECIPE);
+  const userData = data?.me;
+  console.log(`userData: ${userData}`);
+
+  // create function that accepts the recipe's mongo _id value as param and deletes the recipe from the database
+  const handleDeleteRecipe = async (recipeId) => {
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+      return false;
+    }
+
+    try {
+      // const response = await deleteRecipe(recipeId, token);
+      const response = await removeRecipe({
+        variables: {
+          recipeId: recipeId,
+        },
+      });
+
+      if (!response) {
+        throw new Error("something went wrong!");
+      }
+
+      // upon success, remove recipe's id from localStorage
+      removeRecipeId(recipeId);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // if data isn't here yet, say so
+  if (loading) {
+    return <h2>LOADING...</h2>;
+  }
+ 
 
   return (
     <div>
       <Title>
         <h3 className="font-dancing font-bold text-4xl text-cbrown">
-          Welcome, User!
+          Welcome, {userData?.username}!
         </h3>
       </Title>
       <Grid>
-        {savedRecipes.map((recipe) => {
+        {userData?.savedRecipes.map((recipe) => {
           return (
             <RecipeCard
               key={recipe.recipeId} // Use recipeId as the key
