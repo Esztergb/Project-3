@@ -63,7 +63,7 @@
 - [Questions](#questions)
 
 ## Description 
-The Thyme-for-lunch website was created to search for any recipe and add it to your favorites list, You can add your favorite recipes to a weekly calendar to plan out your meals for the week in order to have all the ingredients from your planned meals added to a grocery list so that you can easily plan out your next grocery run.
+The Thyme-for-lunch website was created to search for any recipe and add it to your favorites list. You can add your favorite recipes to a weekly calendar to plan out your meals for the week in order to have all the ingredients from your planned meals added to a grocery list so that you can easily plan out your next grocery run.
 
 
 
@@ -97,6 +97,7 @@ To use the app create a .env file in the server folder and add your API key as f
 -Heroku deployment and connection to MongoDB and Mongoose.
 -Movement of Spoonacular API from frontend to backend.
 -GraphQL setup.
+-THE BACKEND.
 
 
 ## Features
@@ -106,8 +107,16 @@ Features of the site include Reacts ability to easily create a one page applicat
 ## Suggested Future Development
 
 - Connect to Instacart
-- 
-- 
+- Web App Download
+- Mobile App
+- Share list & meal plans with friends
+- Connect to Instacart
+- Calorie and Macros counter
+- Serving size scaler
+- Save meal plans
+- Ingredient substitution
+- Allergen warnings
+- Create your own recipes
 
 ## Tests
 There are currently no unit testings written for this application.
@@ -131,7 +140,6 @@ To learn more click on the following *[link](https://opensource.org/licenses/MIT
 Thank you for tips and sugestions from Bootcamp instructors and classmates. 
 Followed You Tube 
 
-XXX
 
 ## Questions
 Please visit my [GitHub Repo](https://github.com/Esztergb/Thyme-for-Lunch) to view this project.

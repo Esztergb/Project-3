@@ -13,7 +13,7 @@ function MyRecipes() {
   const userData = data?.me;
   useEffect(() => {
     console.log(`userData: ${JSON.stringify(userData)}`);
-  }, [data, loading]);
+  }, [data, loading]) 
 
   // create function that accepts the recipe's mongo _id value as param and deletes the recipe from the database
   const handleDeleteRecipe = async (recipeId) => {
@@ -61,9 +61,7 @@ function MyRecipes() {
               key={recipe.Id} // Use recipeId as the key
               image={recipe.image}
               title={recipe.title}
-              id={recipe.Id}
-              onDelete={handleDeleteRecipe} 
-              showDeleteButton={true}// Use recipeId as the id
+              id={recipe.Id} // Use recipeId as the id
             />
           );
         })}
