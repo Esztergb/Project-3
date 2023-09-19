@@ -118,8 +118,7 @@ const Card = ({ image, title, id, showDeleteButton, showFavoriteButton }) => {
 
 const CardContainer = styled.div`
   min-height: 20rem;
-  max-height: 30rem;
-  max-width: 20rem;
+  /* max-width: 20rem; */
   border-radius: 1rem;
   overflow: hidden;
   position: relative;
@@ -128,7 +127,7 @@ const CardContainer = styled.div`
   border-radius: 7px;
   display: flex;
   flex-direction: column;
-
+  
   img {
     width: 100%;
   }
