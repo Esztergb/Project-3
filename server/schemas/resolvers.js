@@ -24,11 +24,11 @@ const resolvers = {
         throw new Error("Incorrect credentials");
       }
       const token = signToken(user);
-
       return { token, user };
     },
     addUser: async (parent, args) => {
       const user = await User.create(args);
+      console.log('User: ' + user);
       const token = signToken(user);
       return { token, user };
     },
@@ -45,6 +45,7 @@ const resolvers = {
           },
           { new: true }
         );
+        console.log('User: ' + updatedUser);
         return updatedUser;
       }
       throw new Error("user not found");

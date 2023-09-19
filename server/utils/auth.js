@@ -4,7 +4,7 @@ const secret = "thereisaplace";
 const expiration = "2h";
 
 module.exports = {
-  authMiddlewear: function (req) {
+  authMiddlewear: function ({ req }) {
     let token = req.query.token || req.headers.authorization;
 
     if (req.headers.authorization) {
