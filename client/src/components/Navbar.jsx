@@ -5,27 +5,22 @@ import styled from "styled-components";
 import Auth from "../utils/auth";
 
 function Navbar() {
-  // swich over from regular menu to hamburger menu
-  const [ nav, setNav ] = useState(false); //default
-  const handleClick = () => setNav(!nav);
+  const [navOpen, setNavOpen] = useState(false);
+  const navigate = useNavigate();
 
-  // const handleClose = () => setNav(!nav);
-  let navigate = useNavigate();
-  const routeChange = () => {
-    let path = `/signup`;
-    navigate(path);
-  };
-
-  const loggedIn = Auth.loggedIn(); // Check if the user is logged in
+  const loggedIn = Auth.loggedIn();
 
   const handleSignOut = () => {
-    Auth.logout(); // Call the logout method from AuthService
+    Auth.logout();
+  };
+
+  const toggleNav = () => {
+    setNavOpen(!navOpen);
   };
 
   return (
     <div className="w-screen h-[80px] z-10 fixed drop-shadow-md bg-cgreen">
       <div className="px-2 flex justify-between items-center w-full h-full">
-        {/* LOGO AND NAME DIV */}
         <div className="flex items-center">
           <Nav>
             <Logo className="flex" to={"/"}>
@@ -40,25 +35,21 @@ function Navbar() {
             </Logo>
           </Nav>
         </div>
-        {/* POSSIBLE MENU ITEMS - NOT BUILT OUT YET */}
         <div>
           <ul className="hidden md:flex">
             {loggedIn && (
               <>
                 <li className="hover:scale-110">
-                  {" "}
                   <Link to="/myrecipes" className="cursor-pointer">
                     My Recipes
                   </Link>
                 </li>
                 <li className="hover:scale-110">
-                  {" "}
                   <Link to="/calendar" className="cursor-pointer">
                     Weekly Calendar
                   </Link>
                 </li>
                 <li className="hover:scale-110">
-                  {" "}
                   <Link to="/shopping" className="cursor-pointer">
                     Shopping List
                   </Link>
@@ -67,16 +58,19 @@ function Navbar() {
             )}
           </ul>
         </div>
-
-        {/* SIGN IN/SIGN UP BUTTONS */}
         <div className="hidden md:flex pr-4">
           {!loggedIn ? (
-            <button
-              className="border-none bg-transparent text-cbrown mr-4"
-              onClick={() => (window.location.href = "/signin")}
-            >
-              Sign In
-            </button>
+            <>
+              <button
+                className="border-none bg-transparent text-cbrown mr-4"
+                onClick={() => (window.location.href = "/signin")}
+              >
+                Sign In
+              </button>
+              <button className="px-8 py-3" onClick={() => navigate("/signup")}>
+                Sign Up
+              </button>
+            </>
           ) : (
             <button
               className="bg-corange text-cwhite px-8 py-3"
@@ -85,26 +79,19 @@ function Navbar() {
               Sign Out
             </button>
           )}
-          {!loggedIn && (
-            <button className="px-8 py-3" onClick={routeChange}>
-              Sign Up
-            </button>
-          )}
         </div>
-
-        {/* Hamburger menu */}
-        <div className="md:hidden mr-4" onClick={handleClick}>
-          {!nav ? (
+        <div className="md:hidden mr-4" onClick={toggleNav}>
+          {!navOpen ? (
             <MenuIcon className="w-5 text-cbrown" />
           ) : (
             <XIcon className="w-5 text-cbrown" />
           )}
         </div>
       </div>
-
-      {/* this div is part of the Hamburger Menu... */}
       <ul
-        className={!nav ? "hidden" : "md:hidden absolute bg-cgreen w-full px-8"}
+        className={
+          navOpen ? "md:hidden absolute bg-cgreen w-full px-8" : "hidden"
+        }
       >
         {loggedIn && (
           <>
@@ -127,25 +114,24 @@ function Navbar() {
         )}
         {!loggedIn ? (
           <div className="flex flex-col my-4">
-            <button className="bg-transparent text-cbrown px-8 py-3 mb-4">
+            <button
+              className="bg-transparent text-cbrown px-8 py-3 mb-4"
+              onClick={() => navigate("/signin")}
+            >
               Sign In
+            </button>
+            <button className="px-8 py-3" onClick={() => navigate("/signup")}>
+              Sign Up
             </button>
           </div>
         ) : (
           <div className="flex flex-col my-4">
-            {/* Sign Out button */}
             <button
               className="bg-corange text-cwhite px-8 py-3"
               onClick={handleSignOut}
             >
               Sign Out
             </button>
-            {/* Sign Up button */}
-            {!loggedIn && (
-              <button className="px-8 py-3" onClick={routeChange}>
-                Sign Up
-              </button>
-            )}
           </div>
         )}
       </ul>
@@ -153,19 +139,18 @@ function Navbar() {
   );
 }
 
-
 const Logo = styled(Link)`
-text-decoration: none;
-font-size: 1.5rem;
-font-weight: 400;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 400;
 `;
 
 const Nav = styled.div`
-padding: 3rem 0rem;
-display: flex;
-justify-content: flex-start;
-align-items: center;
- svg {
+  padding: 3rem 0rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  svg {
     font-size: 2rem;
   }
 `;
