@@ -65,7 +65,6 @@ const Card = ({ image, title, id, showDeleteButton, showFavoriteButton }) => {
   };
 
   const handleDeleteClick = async () => {
-   console.log("Delete button clicked for ID:", id); 
     try {
       if(id) {
       // Call the removeRecipe mutation to delete the recipe
