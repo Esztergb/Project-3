@@ -43,7 +43,6 @@ const SignIn = () => {
 
      // const { token, user } = await response.json();
      const { token, user } = response.data.login;
-     console.log('this is: ' + user);
      Auth.login(token);
    } catch (err) {
      console.error(err);

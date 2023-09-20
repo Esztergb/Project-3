@@ -14,7 +14,6 @@ router.get("/search", async (req, res) => {
     );
 
     const recipes = response.data.results;
-    console.log('API Recipes #1: ' + recipes);
     res.json(recipes);
   } catch (error) {
     console.error(error);
@@ -31,7 +30,6 @@ router.get("/cuisine/:name", async (req, res) => {
     );
 
     const recipes = response.data.results;
-    console.log('API Recipes #2: ' + recipes);
     res.json(recipes);
   } catch (error) {
     console.error(error);

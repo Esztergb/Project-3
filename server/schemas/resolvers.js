@@ -4,7 +4,6 @@ const { signToken } = require("../utils/auth");
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
-      console.log(JSON.stringify(context.user));
       if (context.user) {
         const user = await User.findOne({ _id: context.user._id })
         return user;
@@ -15,12 +14,10 @@ const resolvers = {
   Mutation: {
     login: async (parent, args) => {
       const user = await User.findOne({ email: args.email });
-      console.log('User: ' + user);
       if (!user) {
         throw new Error("user not found");
       }
       const isCorrectPassword = await user.isCorrectPassword(args.password);
-      console.log('Login Successful');
       if (!isCorrectPassword) {
         throw new Error("Incorrect credentials");
       }
@@ -29,7 +26,6 @@ const resolvers = {
     },
     addUser: async (parent, args) => {
       const user = await User.create(args);
-      console.log('User: ' + user);
       const token = signToken(user);
       return { token, user };
     },
@@ -46,13 +42,11 @@ const resolvers = {
           },
           { new: true }
         );
-        console.log('User: ' + updatedUser);
         return updatedUser;
       }
       throw new Error("user not found");
     },
     removeRecipe: async (parent, args, context) => {
-      console.log("Remove Recipe Mutation - Received recipeId:", args.recipeId);
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           {

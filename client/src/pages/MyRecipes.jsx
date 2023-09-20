@@ -12,7 +12,6 @@ function MyRecipes() {
   const [removeRecipe] = useMutation(REMOVE_RECIPE);
   const userData = data?.me;
   useEffect(() => {
-    console.log(`userData: ${JSON.stringify(userData)}`);
   }, [data, loading, userData]) 
 
   // create function that accepts the recipe's mongo _id value as param and deletes the recipe from the database
@@ -38,7 +37,6 @@ function MyRecipes() {
 
       // upon success, remove recipe's id from localStorage
       removeRecipeId(recipeId);
-      console.log("Recipe deleted successfully");
     } catch (err) {
       console.error(err);
     }
